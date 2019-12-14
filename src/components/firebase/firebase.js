@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/storage';
+import 'firebase/auth';
 
 
 var firebaseConfig = {
@@ -15,4 +16,25 @@ var firebaseConfig = {
   measurementId: "G-8DK7B27L6M"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+class FireBase {
+  constructor() {
+    firebase.initializeApp(firebaseConfig);
+
+    this.auth = firebase.auth();
+  }
+  // Auth Api doCreateUserWithEmailAndPassword = createUserEAP
+  createUserEAP = (email, password) =>
+    this.auth.createUserWithEmailAndPassword(email, password);
+    //doSignInWithEmailAndPassword = signInUserEAP
+  signInUserEAP = (email, password) =>
+    this.auth.signInWithEmailAndPassword(email, password);
+
+  doSignOut = () => this.auth.signOut();
+
+  //Password Resets for current user
+  doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+  doPasswordUpdate = password =>
+    this.auth.currentUser.upsatePassword(password);
+}
+
+export default FireBase;
