@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const AdminPage = () => (
-  <h1>AdminPage coming Soon!</h1>
-);
+import { withFirebase } from './Firebase/fireIndex';
 
-export default AdminPage;
+class AdminPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: false,
+      users: []
+    }
+  }
+
+
+  render() {
+    return(
+      <div>
+        <h1>Admin</h1>
+      </div>
+    );
+  }
+}
+
+export default withFirebase(AdminPage);

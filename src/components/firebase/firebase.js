@@ -1,8 +1,9 @@
-import firebase from 'firebase/app';
+import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/storage';
 import 'firebase/auth';
+import 'firebase/firestore';
 
 
 var firebaseConfig = {
@@ -18,9 +19,10 @@ var firebaseConfig = {
 // Initialize Firebase
 class FireBase {
   constructor() {
-    firebase.initializeApp(firebaseConfig);
+    app.initializeApp(firebaseConfig);
 
-    this.auth = firebase.auth();
+    this.auth = app.auth();
+    this.db = app.firestore();
   }
   // Auth Api doCreateUserWithEmailAndPassword = createUserEAP
   createUserEAP = (email, password) =>
@@ -35,6 +37,10 @@ class FireBase {
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
   doPasswordUpdate = password =>
     this.auth.currentUser.upsatePassword(password);
+
+  //User API
+  user = uid => this.db.collection('users').doc(uid);
+  users = () => this.db.collection('users');
 }
 
 export default FireBase;
