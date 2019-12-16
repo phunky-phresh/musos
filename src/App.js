@@ -11,6 +11,7 @@ import PasswordForgetPage from './components/Account/pwordforget';
 import HomePage from './components/Pages/home';
 import AccountPage from './components/Account/account';
 import AdminPage from './components/admin';
+import ChatRoom from './components/Chatroom/chat';
 
 const App = () => (
   <Router>
@@ -26,6 +27,7 @@ const App = () => (
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
+      <Route path={ROUTES.CHAT_ROOM} component={ChatRoom} />
     </div>
   </Router>
 )

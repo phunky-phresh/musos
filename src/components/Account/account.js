@@ -21,7 +21,9 @@ class AccountPage extends Component {
     const user = db.collection('users').doc(this.state.currentUser)
     user.get().then((response) => {
       console.log(response.data());
-      this.setState({username:response.data().username});
+      this.setState({
+        username:response.data().username
+      });
     })
   }
 
