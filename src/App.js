@@ -1,6 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { withAuthentication } from './components/Session/session';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import * as ROUTES from './constants/routes';
 //Route Imports
 import Navigation from './components/navigation';
@@ -12,14 +13,13 @@ import HomePage from './components/Pages/home';
 import AccountPage from './components/Account/account';
 import AdminPage from './components/admin';
 import ChatRoom from './components/Chatroom/chat';
-import Profile from './components/Account/profile';
+import Profile from './components/Pages/profile';
 
 const App = () => (
   <Router>
     <div>
       <Navigation />
 
-      <hr />
 
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />

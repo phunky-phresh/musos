@@ -8,7 +8,11 @@ class SearchUser extends Component {
     super();
     this.state = {
       foundUsers: [],
-      selectSearch: null
+      selectSearch: null,
+      username: null,
+      email: null,
+      phone: null,
+      address: null
     }
   }
 
@@ -28,9 +32,24 @@ class SearchUser extends Component {
     );
   }
   _handleSearch = (event) => {
+
     event.preventDefault();
-    console.log(this.state.selectSearch.label);
     this.props.history.push(`/profile/${ this.state.selectSearch.value }`)
+
+    const uid = this.state.selectSearch.value
+    const db = this.props.firebase.db;
+    const user = db.collection('users').doc(uid)
+
+    user.get().then(response => {
+      this.setState({
+        username: response.data().username,
+        email: response.data().email,
+        phone: response.data().phone,
+        address: response.data().address
+      })
+      this.props.onSearch(this.state);
+    })
+
     this.setState({
       selectSearch: null
     });
@@ -49,7 +68,6 @@ class SearchUser extends Component {
     return(
       <div>
       <form onSubmit={this._handleSearch}>
-        <p>search</p>
         <Select
           value={selectSearch}
           onChange={this._handeChange}

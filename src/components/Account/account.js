@@ -35,6 +35,9 @@ class AccountPage extends Component {
   }
 
   render() {
+    // this.setState({
+    //   this.state
+    // })
     return(
       <div>
       <h1>{this.state.username}</h1>
