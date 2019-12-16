@@ -7,7 +7,6 @@ import { AuthUserContext } from './session.js';
 const withAuthentication = InnerComponent => {
   class WithAuthentication extends React.Component {
     constructor(props) {
-      console.log(props);
       super(props);
       this.state = {
         authUser: null,

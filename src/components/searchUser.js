@@ -17,7 +17,7 @@ class SearchUser extends Component {
     const users = db.collection('users')
     const foundUsers = [...this.state.foundUsers];
     users.get().then((response) => {
-      response.forEach( u => foundUsers.push(u.data()))
+      response.forEach( u => foundUsers.push({...u.data(), id: u.id}))
       this.setState({foundUsers: foundUsers})
     });
   }
@@ -29,14 +29,18 @@ class SearchUser extends Component {
   }
   _handleSearch = (event) => {
     event.preventDefault();
-    this.props.history.push(`/details/${ this.state.username }`)
+    console.log(this.state.selectSearch.label);
+    this.props.history.push(`/profile/${ this.state.selectSearch.value }`)
+    this.setState({
+      selectSearch: null
+    });
   }
 
   render() {
     const users = this.state.foundUsers;
     const options = users.map(user => {
       return {
-        value: user.email,
+        value: user.id,
         label: user.username
       }
     })

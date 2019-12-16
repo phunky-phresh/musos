@@ -29,7 +29,7 @@ const App = () => (
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
       <Route path={ROUTES.CHAT_ROOM} component={ChatRoom} />
-      <Route path={ROUTES.PROFILE} component={ Profile } />
+      <Route path={ROUTES.PROFILE} component={Profile} />
 
     </div>
   </Router>

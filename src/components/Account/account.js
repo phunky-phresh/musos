@@ -20,7 +20,6 @@ class AccountPage extends Component {
   componentDidMount() {
     const db = this.props.firebase.db
     const user = db.collection('users').doc(this.state.currentUser)
-    const users = db.collection('users')
     user.get().then((response) => {
       this.setState({
         username: response.data().username,
