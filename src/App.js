@@ -12,6 +12,7 @@ import HomePage from './components/Pages/home';
 import AccountPage from './components/Account/account';
 import AdminPage from './components/admin';
 import ChatRoom from './components/Chatroom/chat';
+import Profile from './components/Account/profile';
 
 const App = () => (
   <Router>
@@ -28,6 +29,8 @@ const App = () => (
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
       <Route path={ROUTES.CHAT_ROOM} component={ChatRoom} />
+      <Route path={ROUTES.PROFILE} component={ Profile } />
+
     </div>
   </Router>
 )

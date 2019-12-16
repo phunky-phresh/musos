@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AuthUserContext } from './Session/session';
-
+import SearchUser from './searchUser';
 import SignOutButton from './Sign/signout';
 import * as ROUTES from '../constants/routes';
 
@@ -16,6 +16,8 @@ const Navigation = () => (
 //Different navs based on sign in or not
 const NavigationAuth = () => (
   <div>
+  <SearchUser />
+
     <ul>
       <li>
         <Link to={ROUTES.LANDING}>Landing</Link>
@@ -32,6 +34,7 @@ const NavigationAuth = () => (
       <li>
         <Link to={ROUTES.CHAT_ROOM}>Chat</Link>
       </li>
+
       <li>
         <SignOutButton />
       </li>

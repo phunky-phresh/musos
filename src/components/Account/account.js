@@ -11,26 +11,37 @@ class AccountPage extends Component {
     this.state = {
       currentUser: this.props.authUser.uid,
       username: null,
-      email: null
+      email: null,
+      phone: null,
+      address: null
     }
-    console.log(this.state.currentUser);
   }
 
   componentDidMount() {
     const db = this.props.firebase.db
     const user = db.collection('users').doc(this.state.currentUser)
+    const users = db.collection('users')
     user.get().then((response) => {
-      console.log(response.data());
       this.setState({
-        username:response.data().username
+        username: response.data().username,
+        email: response.data().email,
+        phone: response.data().phone,
+        address: response.data().address
       });
     })
+
+    // users.get().then((response) => {
+    //   response.forEach( u => console.log(u.data()))
+    // })
   }
 
   render() {
     return(
       <div>
       <h1>{this.state.username}</h1>
+      <h1>Email: {this.state.email}</h1>
+      <h1>Mobile: {this.state.phone}</h1>
+      <h1>Address: {this.state.address}</h1>
         <AccountDetails />
       </div>
     )
