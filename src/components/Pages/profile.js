@@ -47,10 +47,13 @@ class Profile extends Component {
     console.log(mThreadId);
 
     db.collection('chatRooms').doc(mThreadId).set({
-      init: "it worked"
+      user1: currentUser,
+      user2: profileUser,
+      messages: []
     }).then(() =>{
       console.log("it worked");
     })
+    this.props.history.push(`/thread/${ mThreadId }`)
   }
 
 
@@ -68,7 +71,7 @@ class Profile extends Component {
         <h1>Profile</h1>
         <h1>{this.state.user.username}</h1>
 
-        <Link  onClick={this._handleMessageClick}>Message</Link>
+        <Button onClick={this._handleMessageClick}>Message</Button>
       </div>
     )
   }

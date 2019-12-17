@@ -6,5 +6,6 @@ export const ACCOUNT = '/account';
 export const ADMIN = '/admin';
 export const PASSWORD_FORGET = '/pw-forget';
 export const CHAT_ROOM = '/chat-room';
+export const THREAD = '/thread/:threadId';
 export const PROFILE = '/profile/:username';
 export const FEED = '/feed';

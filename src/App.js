@@ -13,6 +13,7 @@ import HomePage from './components/Pages/search';
 import AccountPage from './components/Account/account';
 import AdminPage from './components/admin';
 import ChatRoom from './components/Chatroom/chat';
+import Thread from './components/Chatroom/thread';
 import Profile from './components/Pages/profile';
 import Feed from './components/Pages/feed';
 
@@ -31,6 +32,7 @@ const App = () => (
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
       <Route path={ROUTES.CHAT_ROOM} component={ChatRoom} />
+      <Route path={ROUTES.THREAD} component={Thread} />
       <Route path={ROUTES.PROFILE} component={Profile} />
 
     </div>
