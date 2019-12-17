@@ -1,9 +1,10 @@
 export const LANDING = '/landing';
 export const SIGN_UP = '/signup';
 export const SIGN_IN = '/signin';
-export const HOME = '/';
+export const SEARCH = '/';
 export const ACCOUNT = '/account';
 export const ADMIN = '/admin';
 export const PASSWORD_FORGET = '/pw-forget';
 export const CHAT_ROOM = '/chat-room';
 export const PROFILE = '/profile/:username';
+export const FEED = '/feed';

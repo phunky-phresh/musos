@@ -22,7 +22,7 @@ const NavigationAuth = () => (
     <Navbar bg="dark" variant="dark">
       <Nav className="mr-auto">
         <Nav>
-          <Link className="nav-link" to={ROUTES.HOME}>Home</Link>
+          <Link className="nav-link" to={ROUTES.FEED}>Feed</Link>
         </Nav>
         <Nav>
           <Link className="nav-link" to={ROUTES.ACCOUNT}>Account</Link>

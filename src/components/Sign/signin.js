@@ -32,7 +32,7 @@ class SignInFormBase extends Component {
     this.props.firebase
       .signInUserEAP(email, password).then(() => {
         this.setState( { ...INITIAL_STATE } );
-        this.props.history.push(ROUTES.HOME);
+        this.props.history.push(ROUTES.SEARCH);
       })
       .catch(error => {
         this.setState({ error });
