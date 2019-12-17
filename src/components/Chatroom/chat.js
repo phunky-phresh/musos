@@ -1,29 +1,66 @@
 import React, { Component } from 'react';
+import { AuthUserContext, withAuthorization } from '../Session/session';
+import { withAuth } from '../Session/session-context';
 
 class ChatRoom extends Component {
-  constructor() {
-    super();
-    console.log('this');
+  constructor(props) {
+    super(props);
+    console.log(props);
+    this.state = {threads:null};
   }
 
   _handleSubmit = (event) => {
     event.preventDefault();
   }
+  componentDidMount() {
+    const db = this.props.firebase.db;
+    console.log(db);
+    const returnedThreads = [];
+    // const threadId = this.props.match.params.threadId
+    db.collection('chatRooms').get().then(response => {
+      response.forEach( thread => {
+        console.log(thread.data());
+        returnedThreads.push(thread.data());
+      })
+      this.setState({threads: returnedThreads})
+
+    })
+  }
 
   render() {
-    return (
-      <div>
-        <h1>Chat room coming soon</h1>
-        <select>
-          <option>one</option>
-        </select>
-        <form onSubmit={this._handleSubmit}>
-          <input type='text' placeholder="text"/>
-          <button>send</button>
-        </form>
-      </div>
+    if(!this.state.threads) {
+      return '';
+    }
+    return(
+      <ThreadList
+        list={this.state.threads}
+      />
     )
   }
 }
 
-export default ChatRoom;
+const ThreadList = (props) => {
+  if (!props.list) {
+    return '';
+  }
+  console.log(props.list);
+  const threadList = props.list
+  console.log(threadList);
+  // const list = thr eadList
+    const threads = threadList.map(t => {
+      return <p>{t.user1}</p>
+
+    })
+
+  return (
+    <div>
+      <h1>Chat room coming soon</h1>
+      {threads}
+
+    </div>
+  )
+}
+
+const condition = authUser => !!authUser;
+
+export default withAuth(withAuthorization(condition)(ChatRoom));

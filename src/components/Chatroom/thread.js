@@ -11,10 +11,18 @@ class Thread extends Component {
     super(props);
     console.log(props);
     this.state = {
-      text: ''
+      text: '',
+      messageList: []
     }
   }
 
+  componentDidMount() {
+    const db = this.props.firebase.db;
+    const threadId = this.props.match.params.threadId
+    db.collection('chatRooms').doc(threadId).onSnapshot(response => {
+      this.setState({messageList: response.data().messages})
+    })
+  }
   _handleInput = (e) => {
     console.log(e);
     this.setState({text: e.target.value})
@@ -45,6 +53,7 @@ class Thread extends Component {
     return(
       <div>
         <h1>thread</h1>
+        <MessageList list={this.state.messageList}/>
         <Form onSubmit={this._handleSubmit}>
           <input onInput={ this._handleInput } type="text" />
           <Button type="submit">Send</Button>
@@ -53,6 +62,20 @@ class Thread extends Component {
     )
   }
 
+}
+
+const MessageList = (props) => {
+  console.log(props.list);
+  const messageList = props.list
+  const messages = messageList.map(m => {
+    return <p>{m.text}</p>
+  })
+  return(
+    <div>
+    <h1>list</h1>
+      {messages}
+    </div>
+  )
 }
 
 const condition = authUser => !!authUser;

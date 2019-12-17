@@ -41,6 +41,7 @@ class FireBase {
   //User API
   user = uid => this.db.collection('users').doc(uid);
   users = () => this.db.collection('users');
+  threads = () => this.db.collection('chatRooms');
 }
 
 export default FireBase;
