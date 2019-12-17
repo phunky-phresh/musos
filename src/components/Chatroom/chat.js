@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AuthUserContext, withAuthorization } from '../Session/session';
+import { withAuthorization } from '../Session/session';
 import { withAuth } from '../Session/session-context';
 
 class ChatRoom extends Component {
@@ -13,14 +13,19 @@ class ChatRoom extends Component {
     event.preventDefault();
   }
   componentDidMount() {
+    const currentUser = this.props.authUser.uid;
+    console.log(currentUser);
     const db = this.props.firebase.db;
-    console.log(db);
+
     const returnedThreads = [];
     // const threadId = this.props.match.params.threadId
     db.collection('chatRooms').get().then(response => {
       response.forEach( thread => {
         console.log(thread.data());
-        returnedThreads.push(thread.data());
+          if (currentUser === thread.data().user1 || currentUser === thread.data().user2) {
+            returnedThreads.push(thread.data());
+
+          }
       })
       this.setState({threads: returnedThreads})
 
@@ -48,7 +53,8 @@ const ThreadList = (props) => {
   console.log(threadList);
   // const list = thr eadList
     const threads = threadList.map(t => {
-      return <p>{t.user1}</p>
+
+      return <p key={t.user2}>{t.user1}</p>
 
     })
 

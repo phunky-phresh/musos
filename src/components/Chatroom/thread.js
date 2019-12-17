@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AuthUserContext, withAuthorization } from '../Session/session';
+import { withAuthorization } from '../Session/session';
 import { withAuth } from '../Session/session-context';
 import * as firebase from 'firebase'
 
@@ -20,7 +20,9 @@ class Thread extends Component {
     const db = this.props.firebase.db;
     const threadId = this.props.match.params.threadId
     db.collection('chatRooms').doc(threadId).onSnapshot(response => {
-      this.setState({messageList: response.data().messages})
+      if (response.data().messages !== null) {
+        this.setState({messageList: response.data().messages})
+      }
     })
   }
   _handleInput = (e) => {

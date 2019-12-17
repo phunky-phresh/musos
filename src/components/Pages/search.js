@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withAuthorization } from '../Session/session';
 import { withAuth } from '../Session/session-context';
-import Feed from './feed';
-import Profile from './profile';
+// import Feed from './feed';
+// import Profile from './profile';
 import SearchBar from '../searchUser';
 
 class HomePage extends Component {

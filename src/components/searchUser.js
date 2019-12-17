@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AuthUserContext, withAuthorization } from './Session/session';
+import { withAuthorization } from './Session/session';
 import { withAuth } from './Session/session-context';
 import Select from 'react-select';
 

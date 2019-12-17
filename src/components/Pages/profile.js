@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
-import { AuthUserContext, withAuthorization } from '../Session/session';
+  import { withAuthorization } from '../Session/session';
 import { withAuth } from '../Session/session-context';
-import SearchBar from '../searchUser';
+// import SearchBar from '../searchUser';
 import { Button } from 'react-bootstrap';
-import {Link} from 'react-router-dom';
-import * as ROUTES from '../../constants/routes'
+// import {Link} from 'react-router-dom';
+// import * as ROUTES from '../../constants/routes'
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     console.log(props);
     this.state = {user:null}
-    console.log(this.state.user);
-  }
+ }
 
   _populateProfile = () => {
     const uid = this.props.match.params.username;
     const db = this.props.firebase.db;
     const user = db.collection('users').doc(uid);
-    console.log(uid);
 
     user.get().then(response => {
       console.log(response.data());

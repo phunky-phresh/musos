@@ -7,7 +7,7 @@ import * as ROUTES from '../constants/routes';
 
 
 //bootstrap/////
-import {Navbar, Nav, Button} from 'react-bootstrap';
+import {Navbar, Nav} from 'react-bootstrap';
 const Navigation = () => (
   <div>
     <AuthUserContext.Consumer>
