@@ -15,6 +15,17 @@ class AccountForm extends Component {
   }
 
   _returnAccount = () => {
+    const db = this.props.firebase.db
+    const uid = localStorage.uid
+    db.collection('users').doc(uid).set({
+      email: this.props.authUser.email,
+      username: this.state.username,
+      about: this.state.about,
+      location: this.state.location,
+      media: this.state.media
+    }).then(
+    console.log('it worked'))
+
     this.props.view()
   }
 
@@ -24,14 +35,24 @@ class AccountForm extends Component {
     const uid = localStorage.uid
 
     db.collection('users').doc(uid).get().then(response => {
-      console.log(response.data());
-      this.setState({user: response.data()})
+      let user = response.data();
+      this.setState({...user})
     })
   }
 
+  _handleChange = (e) => {
+    this.setState({ [ e.target.name ]: e.target.value });
+  }
+
   render() {
+    const {
+      username,
+      about,
+      location,
+      media
+    } = this.state;
     console.log(this.props);
-    if (!this.state.user) {
+    if (!this.state) {
       return ''
     }
     return(
@@ -39,19 +60,44 @@ class AccountForm extends Component {
         <Form>
           <Form.Group>
             <Form.Label>Username: </Form.Label>
-            <Form.Control type="text" value={this.state.user.username}></Form.Control>
+            <Form.Control
+              name ="username"
+              value={username}
+              type="text"
+              onChange={this._handleChange}
+            >
+            </Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label>About: </Form.Label>
-            <Form.Control type="text" as="textarea"></Form.Control>
+            <Form.Control
+              name="about"
+              value={about}
+              type="text"
+              as="textarea"
+              onChange={this._handleChange}
+            >
+            </Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label>Location: </Form.Label>
-            <Form.Control type="text"></Form.Control>
+            <Form.Control
+              name="location"
+              value={location}
+              type="text"
+              onChange={this._handleChange}
+             >
+             </Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label>Media: </Form.Label>
-            <Form.Control type="text"></Form.Control>
+            <Form.Control
+              name="media"
+              value={media}
+              type="text"
+              onChange={this._handleChange}
+            >
+            </Form.Control>
           </Form.Group>
           <Button onClick={this._returnAccount}>Save</Button>
         </Form>
