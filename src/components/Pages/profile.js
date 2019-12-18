@@ -53,8 +53,8 @@ class Profile extends Component {
 
   _handleMessageClick = () => {
     const db = this.props.firebase.db;
-    const currentUserId = this.props.authUser.uid;
-    const currentUsername = this.state.currentUsername;
+    const currentUserId = localStorage.uid;
+    const currentUsername = localStorage.username;
     const profileUserId = this.props.match.params.username;
     const profileUsername = this.state.user.username;
     const mThreadId = currentUserId + profileUserId;
@@ -65,8 +65,6 @@ class Profile extends Component {
           {uid: profileUserId, username: profileUsername}
         ],
         messages: []
-      }).then(() =>{
-        console.log("it worked");
       })
       this.props.history.push(`/thread/${ mThreadId }`)
     } else {

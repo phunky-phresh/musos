@@ -64,11 +64,14 @@ class SearchUser extends Component {
       }
     })
 
+    const isInvalid = this.state.selectSearch === null;
+
     const { selectSearch } = this.state
     return(
       <div>
       <form onSubmit={this._handleSearch}>
         <Select
+          name='search'
           value={selectSearch}
           onChange={this._handeChange}
           options={options}
@@ -76,7 +79,7 @@ class SearchUser extends Component {
           autoFocus
           required
         />
-        <button type="submit">search</button>
+        <button disabled={isInvalid} type="submit">search</button>
       </form>
       </div>
     )

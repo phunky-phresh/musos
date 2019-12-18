@@ -24,7 +24,6 @@ class HomePage extends Component {
 
     db.collection('users').doc(currentUser).get().then(response => {
       let username = response.data().username;
-      console.log(username);
       localStorage.setItem('username', username)
       localStorage.setItem('uid', currentUser)
     })
