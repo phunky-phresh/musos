@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import { AuthUserContext } from './Session/session';
 import SignOutButton from './Sign/signout';
 import * as ROUTES from '../constants/routes';
-// import SearchBar from './searchUser';
-
-
+import './navigation.css'
 //bootstrap/////
 import {Navbar, Nav} from 'react-bootstrap';
+
 const Navigation = () => (
   <div>
     <AuthUserContext.Consumer>
@@ -20,6 +19,8 @@ const Navigation = () => (
 const NavigationAuth = () => (
   <div>
     <Navbar bg="dark" variant="dark">
+
+
       <Nav className="mr-auto">
         <Nav>
           <Link className="nav-link" to={ROUTES.FEED}>Feed</Link>
@@ -38,7 +39,6 @@ const NavigationAuth = () => (
         <SignOutButton />
 
     </Navbar>
-
   </div>
 );
 

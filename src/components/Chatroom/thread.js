@@ -9,7 +9,6 @@ import { Form, Button } from 'react-bootstrap';
 class Thread extends Component {
   constructor(props){
     super(props);
-    console.log(props);
     this.state = {
       text: '',
       messageList: []
@@ -26,22 +25,17 @@ class Thread extends Component {
     })
   }
   _handleInput = (e) => {
-    console.log(e);
     this.setState({text: e.target.value})
   }
 
   _handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target.value);
-    console.log(this.props);
 
     const db = this.props.firebase.db;
     const threadId = this.props.match.params.threadId
-    console.log(threadId);
-    // const firebase = this.props.firebase.db
-    // console.log(firebase);
     const newText = {
       time: new Date(),
+      from: this.props.authUser.uid,
       text: this.state.text
     }
     const thread = db.collection('chatRooms').doc(threadId)
@@ -67,7 +61,6 @@ class Thread extends Component {
 }
 
 const MessageList = (props) => {
-  console.log(props.list);
   const messageList = props.list
   const messages = messageList.map(m => {
     return <p>{m.text}</p>

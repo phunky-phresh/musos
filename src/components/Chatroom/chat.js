@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { withAuthorization } from '../Session/session';
 import { withAuth } from '../Session/session-context';
+import { Link } from 'react-router-dom';
 
 class ChatRoom extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {threads:null};
   }
 
@@ -14,18 +14,16 @@ class ChatRoom extends Component {
   }
   componentDidMount() {
     const currentUser = this.props.authUser.uid;
-    console.log(currentUser);
     const db = this.props.firebase.db;
-
     const returnedThreads = [];
     // const threadId = this.props.match.params.threadId
     db.collection('chatRooms').get().then(response => {
       response.forEach( thread => {
-        console.log(thread.data());
-          if (currentUser === thread.data().user1 || currentUser === thread.data().user2) {
+          if (currentUser === thread.data().users[0].uid || currentUser === thread.data().users[1].uid) {
             returnedThreads.push(thread.data());
-
           }
+
+
       })
       this.setState({threads: returnedThreads})
 
@@ -39,6 +37,9 @@ class ChatRoom extends Component {
     return(
       <ThreadList
         list={this.state.threads}
+        link={this.props.history}
+        user={this.props.authUser}
+        request={this.props.firebase}
       />
     )
   }
@@ -48,13 +49,27 @@ const ThreadList = (props) => {
   if (!props.list) {
     return '';
   }
-  console.log(props.list);
-  const threadList = props.list
-  console.log(threadList);
-  // const list = thr eadList
-    const threads = threadList.map(t => {
+  const threadList = props.list;
+  //for db request
+  const currentUser = props.user.uid
 
-      return <p key={t.user2}>{t.user1}</p>
+
+    const threads = threadList.map(t => {
+      const threadLink = t.users[0].uid + t.users[1].uid;
+      const user1 = t.users[0].uid;
+      let user1name = ''
+      const user2 = t.users[1].uid;
+
+      if (currentUser !== user2) {
+        user1name = t.users[1].username
+      } else {
+        user1name = t.users[0].username
+      }
+
+        return <div key={2}><Link to={`/thread/${ threadLink }`}>{user1name}</Link></div>
+
+
+      // console.log(chatWith);
 
     })
 

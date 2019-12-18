@@ -10,7 +10,10 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     console.log(props);
-    this.state = {user:null}
+    this.state = {
+      user:null,
+      currentUsername: null
+    }
  }
 
   _populateProfile = () => {
@@ -26,6 +29,15 @@ class Profile extends Component {
 
   componentDidMount(){
     this._populateProfile();
+    const currentUserId = this.props.authUser.uid;
+    const db = this.props.firebase.db;
+    const user = db.collection('users').doc(currentUserId);
+
+    user.get().then(response => {
+      // console.log(response.data().username);
+      this.setState({currentUsername: response.data().username})
+    })
+
   }
 
   componentDidUpdate(prevProps) {
@@ -36,17 +48,17 @@ class Profile extends Component {
 
   _handleMessageClick = () => {
     const db = this.props.firebase.db;
-    const currentUser = this.props.authUser.uid;
-    const profileUser = this.props.match.params.username;
-    const mThreadId = currentUser + profileUser;
-
-    console.log(currentUser);
-    console.log(profileUser);
-    console.log(mThreadId);
+    const currentUserId = this.props.authUser.uid;
+    const currentUsername = this.state.currentUsername;
+    const profileUserId = this.props.match.params.username;
+    const profileUsername = this.state.user.username;
+    const mThreadId = currentUserId + profileUserId;
 
     db.collection('chatRooms').doc(mThreadId).set({
-      user1: currentUser,
-      user2: profileUser,
+      users: [
+        {uid: currentUserId, username: currentUsername},
+        {uid: profileUserId,username: profileUsername}
+      ],
       messages: []
     }).then(() =>{
       console.log("it worked");
