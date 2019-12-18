@@ -20,6 +20,7 @@ class SignInFormBase extends Component {
     this.state = {
       ...INITIAL_STATE
     };
+
   }
 
   _handleOnChange = (event) => {

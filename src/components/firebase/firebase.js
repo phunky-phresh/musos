@@ -31,7 +31,11 @@ class FireBase {
   signInUserEAP = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
 
-  doSignOut = () => this.auth.signOut();
+  doSignOut = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('uid');
+    this.auth.signOut();
+  }
 
   //Password Resets for current user
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);

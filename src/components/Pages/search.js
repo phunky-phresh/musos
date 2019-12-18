@@ -17,6 +17,18 @@ class HomePage extends Component {
     this.setState({ user });
     this.setState({ feed: false })
   }
+  componentDidMount() {
+    const db = this.props.firebase.db;
+    const currentUser = this.props.authUser.uid;
+    // let username = '';
+
+    db.collection('users').doc(currentUser).get().then(response => {
+      let username = response.data().username;
+      console.log(username);
+      localStorage.setItem('username', username)
+      localStorage.setItem('uid', currentUser)
+    })
+  }
 
   render() {
     const feed = this.state.feed

@@ -9,11 +9,12 @@ import { Button } from 'react-bootstrap';
 class Profile extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
-      user:null,
-      currentUsername: null
+      user: null,
+      currentUsername: localStorage.username,
+      existingThread: null
     }
+    // console.log(this.state.currentUsername);
  }
 
   _populateProfile = () => {
@@ -22,22 +23,26 @@ class Profile extends Component {
     const user = db.collection('users').doc(uid);
 
     user.get().then(response => {
-      console.log(response.data());
       this.setState({user: response.data()})
     })
   }
 
   componentDidMount(){
     this._populateProfile();
-    const currentUserId = this.props.authUser.uid;
+    const currentUserId = localStorage.uid;
+    const profileUserId = this.props.match.params.username;
     const db = this.props.firebase.db;
-    const user = db.collection('users').doc(currentUserId);
+    const thread1 = currentUserId + profileUserId
+    const thread2 = profileUserId + currentUserId
+    const threadCheck = db.collection('chatRooms');
 
-    user.get().then(response => {
-      console.log(response.data().username);
-      this.setState({currentUsername: response.data().username})
-    })
-
+    threadCheck.get().then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          if (doc.id === thread1 || doc.id === thread2) {
+            this.setState({existingThread: doc.id})
+          }
+        })
+      })
   }
 
   componentDidUpdate(prevProps) {
@@ -53,26 +58,25 @@ class Profile extends Component {
     const profileUserId = this.props.match.params.username;
     const profileUsername = this.state.user.username;
     const mThreadId = currentUserId + profileUserId;
+    if (!this.state.existingThread) {
+      db.collection('chatRooms').doc(mThreadId).set({
+        users: [
+          {uid: currentUserId, username: currentUsername},
+          {uid: profileUserId, username: profileUsername}
+        ],
+        messages: []
+      }).then(() =>{
+        console.log("it worked");
+      })
+      this.props.history.push(`/thread/${ mThreadId }`)
+    } else {
+      this.props.history.push(`/thread/${ this.state.existingThread }`)
+    }
 
-    db.collection('chatRooms').doc(mThreadId).set({
-      users: [
-        {uid: currentUserId, username: currentUsername},
-        {uid: profileUserId,username: profileUsername}
-      ],
-      messages: []
-    }).then(() =>{
-      console.log("it worked");
-    })
-    this.props.history.push(`/thread/${ mThreadId }`)
   }
 
 
   render() {
-    // <h1>Profile coming soon</h1>
-    // <h1>{this.props.user.username}</h1>
-    // <h1>Email: {this.props.user.email}</h1>
-    // <h1>Mobile: {this.props.user.phone}</h1>
-    // <h1>Address: {this.props.user.address}</h1>
     if (!this.state.user) {
       return '';
     }
