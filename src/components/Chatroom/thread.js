@@ -11,6 +11,7 @@ class Thread extends Component {
     super(props);
     this.state = {
       text: '',
+      currentUsername: null,
       messageList: []
     }
   }
@@ -22,6 +23,10 @@ class Thread extends Component {
       if (response.data().messages !== null) {
         this.setState({messageList: response.data().messages})
       }
+    })
+    const currentUser = this.props.authUser.uid
+    db.collection('users').doc(currentUser).onSnapshot( response => {
+      this.setState({currentUsername: response.data().username});
     })
   }
   _handleInput = (e) => {
@@ -35,13 +40,14 @@ class Thread extends Component {
     const threadId = this.props.match.params.threadId
     const newText = {
       time: new Date(),
-      from: this.props.authUser.uid,
+      from: this.state.currentUsername,
       text: this.state.text
     }
     const thread = db.collection('chatRooms').doc(threadId)
     thread.update({
       messages: firebase.firestore.FieldValue.arrayUnion(newText)
     })
+    this.setState({text: ''});
 
   }
 
@@ -51,7 +57,7 @@ class Thread extends Component {
         <h1>thread</h1>
         <MessageList list={this.state.messageList}/>
         <Form onSubmit={this._handleSubmit}>
-          <input onInput={ this._handleInput } type="text" />
+          <input onInput={ this._handleInput } value={this.state.text} type="text" />
           <Button type="submit">Send</Button>
         </Form>
       </div>
@@ -63,7 +69,7 @@ class Thread extends Component {
 const MessageList = (props) => {
   const messageList = props.list
   const messages = messageList.map(m => {
-    return <p>{m.text}</p>
+    return <div><h3></h3><p>{m.text}</p></div>
   })
   return(
     <div>

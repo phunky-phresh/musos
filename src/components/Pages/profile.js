@@ -34,7 +34,7 @@ class Profile extends Component {
     const user = db.collection('users').doc(currentUserId);
 
     user.get().then(response => {
-      // console.log(response.data().username);
+      console.log(response.data().username);
       this.setState({currentUsername: response.data().username})
     })
 
