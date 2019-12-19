@@ -25,23 +25,28 @@ class NavigationAuth extends Component {
     this.state ={
       notification: false,
       chatClass: 'nav-link',
+      thread: [],
       logged: false
     }
     console.log(props);
     const db = props.props.firebase.db
-    console.log(db);
     db.collection("chatRooms").onSnapshot((doc) => {
         if (this.state.logged === false) {
           this.setState({logged: true})
           return;
         }
-            doc.docs.forEach( thread => {
-            let user1 = thread.data().users[0].uid
-            let user2 = thread.data().users[1].uid
+            doc.docChanges().forEach( thread => {
+            let user1 = thread.doc.data().users[0].uid
+            let user2 = thread.doc.data().users[1].uid
+            // console.log(user1);
+            let newArr = [...this.state.thread]
             if (localStorage.uid === user1 || localStorage.uid === user2) {
-              console.log('match');
-              this.setState({notification: true})
+              console.log(thread.doc.id);
+              let t = thread.doc.id
+              newArr.push(t);
+
             }
+            this.setState({thread: newArr})
           });
           if (this.state.notification === true) {
             console.log('notification');
@@ -49,6 +54,9 @@ class NavigationAuth extends Component {
           }
       });
 
+  }
+  _removeNotification = () => {
+    this.setState({chatClass: 'nav-link'})
   }
 
 
@@ -70,7 +78,7 @@ class NavigationAuth extends Component {
                 <Link className="nav-link" to={ROUTES.ADMIN}>Admin</Link>
               </Nav>
               <Nav>
-                <Link className={this.state.chatClass} to={ROUTES.CHAT_ROOM}>Chat</Link>
+                <Link onClick={this._removeNotification} className={this.state.chatClass} to={ROUTES.CHAT_ROOM}>Chat</Link>
               </Nav>
             </Nav>
 
