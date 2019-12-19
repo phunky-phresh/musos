@@ -6,6 +6,7 @@ import { withFirebase } from '../Firebase/fireIndex';
 import { SignUpLink } from './signup';
 import { PasswordForgetLink } from '../Account/pwordforget';
 
+import { Form, Button, Row } from 'react-bootstrap';
 import * as ROUTES from '../../constants/routes';
 
 const INITIAL_STATE = {
@@ -50,28 +51,33 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return(
-      <form onSubmit={this._handleOnSubmit}>
-        <input
-          name="email"
-          value={email}
-          onChange={this._handleOnChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="password"
-          value={password}
-          onChange={this._handleOnChange}
-          type="password"
-          placeholder="Enter Password"
-        />
-
-        <button disabled={isInvalid} type="submit">
+      <Form onSubmit={this._handleOnSubmit}>
+        <Form.Group>
+          <Form.Control
+            name="email"
+            value={email}
+            onChange={this._handleOnChange}
+            type="text"
+            placeholder="Email Address"
+          >
+          </Form.Control>
+        </Form.Group>
+        <Form.Group>
+          <Form.Control
+            name="password"
+            value={password}
+            onChange={this._handleOnChange}
+            type="password"
+            placeholder="Enter Password"
+          >
+          </Form.Control>
+        </Form.Group>
+        <Button disabled={isInvalid} type="submit">
           Sign In
-        </button>
+        </Button>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     );
   }
 };

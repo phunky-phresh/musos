@@ -28,7 +28,6 @@ class NavigationAuth extends Component {
       thread: [],
       logged: false
     }
-    console.log(props);
     const db = props.props.firebase.db
     db.collection("chatRooms").onSnapshot((doc) => {
         if (this.state.logged === false) {
@@ -77,7 +76,7 @@ class NavigationAuth extends Component {
               </Nav>
 
               <Nav>
-                <Link Click={this._removeNotification} className={this.state.chatClass} to={ROUTES.CHAT_ROOM}>Chat</Link>
+                <Link onClick={this._removeNotification} className={this.state.chatClass} to={ROUTES.CHAT_ROOM}>Chat</Link>
               </Nav>
             </Nav>
 

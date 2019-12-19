@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 class ChatRoom extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {threads:null};
   }
 
@@ -17,7 +16,6 @@ class ChatRoom extends Component {
     const currentUser = this.props.authUser.uid;
     const db = this.props.firebase.db;
     const returnedThreads = [];
-    // const threadId = this.props.match.params.threadId
     db.collection('chatRooms').get().then(response => {
       response.forEach( thread => {
           if (currentUser === thread.data().users[0].uid || currentUser === thread.data().users[1].uid) {
@@ -35,10 +33,6 @@ class ChatRoom extends Component {
     const threadId = e.target.getAttribute('value');
     db.collection('chatRooms').doc(threadId).update({
       seen: true
-    }).then(() => {
-      console.log('success');
-    }).catch((error) => {
-      console.log('fail', error);
     })
   }
 
@@ -68,7 +62,6 @@ const ThreadList = (props) => {
 
 
     const threads = threadList.map(t => {
-      console.log(t.seen);
       const threadLink = t.users[0].uid + t.users[1].uid;
       const user1 = t.users[0].uid;
       let user1name = ''
@@ -90,7 +83,7 @@ const ThreadList = (props) => {
           key={threadLink}
           value={threadLink}
           >
-          {user1name}
+          <h4>{user1name}</h4>
         </div>
         </Link>
 

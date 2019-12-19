@@ -6,16 +6,22 @@
   /* background-color: gray; */
 }
 .thread {
-  /* width: 100px; */
   height: 50px;
-  background-color: lavender;
+  background-color: #5D87E8;
   margin: 10px;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
 }
 .notification {
   background-color: coral;
 }
 .thread:hover {
   background-color: white;
+  color: #5D87E8;
+  border: 2px solid #5D87E8;
+  text-decoration: none;
 }
 .right {
   display: block;
@@ -24,20 +30,22 @@
   margin: 10px 0 10px 270px;
   width: 500px;
   text-align: right;
-  background-color: gray;
+  background-color: #5D87E8;
   padding: 10px;
   border-radius: 10px;
-
+  color: white;
 }
 .left {
   display: block;
   width: 500px;
   text-align: left;
-  background-color: blue;
+  background-color: gray;
   margin: 10px 0;
   padding: 10px;
   border-radius: 10px;
+  color: white;
 }
 .time {
   opacity: 70%;
+  font-size: 10px;
 }

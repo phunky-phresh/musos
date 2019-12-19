@@ -4,8 +4,9 @@ import { withAuth } from '../Session/session-context';
 import AccountForm from './accountForm';
 import { PasswordForgetForm } from './pwordforget';
 import PasswordChangeForm from './pwordchange';
-
+import './account.css'
 import { Button, Row, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 class AccountPage extends Component {
   constructor(props) {
@@ -13,7 +14,6 @@ class AccountPage extends Component {
     this.state = {
       view: ''
     }
-    console.log(this.state.view);
   }
 
   _populateState = () => {
@@ -61,18 +61,20 @@ class AccountPage extends Component {
           <h1>{this.state.username}</h1>
 
 
-          <h2>Email:</h2>
+          <h3>Email:</h3>
             <p>{this.state.email}</p>
 
-          <h2>About:</h2>
+          <h3>About:</h3>
             <p>{this.state.about}</p>
 
-          <h2>Location:</h2>
+          <h3>Location:</h3>
             <p>{this.state.location}</p>
-          
-          <Button onClick={this._handleFormView}>Update Account Detail</Button>
-          <Button onClick={this._handleSetView}>Password Settings</Button>
-
+          <h3>Media:</h3>
+            <p><Link href={this.state.media} >{this.state.media}</Link></p>
+          <div className="controls">
+          <Button block onClick={this._handleFormView}>Update Account Detail</Button>
+          <Button  block onClick={this._handleSetView}>Password Settings</Button>
+          </div>
         </div>
       )
     }

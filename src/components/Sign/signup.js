@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
-
+import { Form, Button } from 'react-bootstrap';
 import { withFirebase } from '../Firebase/fireIndex';
 
 import * as ROUTES from '../../constants/routes';
@@ -57,41 +57,54 @@ class SignUpFormBase extends Component {
     username === '';
 
     return(
-      <form onSubmit={this._handleOnSubmit}>
-        <input
-          name="username"
-          value={username}
-          onChange={this._handleOnChange}
-          type="text"
-          placeholder="Band Name"
-        />
-        <input
-          name="email"
-          value={email}
-          onChange={this._handleOnChange}
-          type="text"
-          placeholder="email address"
-        />
-        <input
-          name="password1"
-          value={password1}
-          onChange={this._handleOnChange}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          name="password2"
-          value={password2}
-          onChange={this._handleOnChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <button disabled={isInvalid} type="submit">
+      <Form onSubmit={this._handleOnSubmit}>
+        <Form.Group>
+          <Form.Control
+            name="username"
+            value={username}
+            onChange={this._handleOnChange}
+            type="text"
+            placeholder="Band Name"
+          >
+          </Form.Control>
+        </Form.Group>
+        <Form.Group>
+          <Form.Control
+            name="email"
+            value={email}
+            onChange={this._handleOnChange}
+            type="text"
+            placeholder="email address"
+          >
+          </Form.Control>
+        </Form.Group>
+        <Form.Group>
+          <Form.Control
+            name="password1"
+            value={password1}
+            onChange={this._handleOnChange}
+            type="password"
+            placeholder="Password"
+          >
+          </Form.Control>
+        </Form.Group>
+        <Form.Group>
+          <Form.Control
+            name="password2"
+            value={password2}
+            onChange={this._handleOnChange}
+            type="password"
+            placeholder="Confirm Password"
+          >
+          </Form.Control>
+        </Form.Group>
+
+        <Button disabled={isInvalid} type="submit">
           Sign Up
-        </button>
+        </Button>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     )
   }
 }

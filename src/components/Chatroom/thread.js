@@ -19,6 +19,9 @@ class Thread extends Component {
   componentDidMount() {
     const db = this.props.firebase.db;
     const threadId = this.props.match.params.threadId
+    if (!threadId) {
+      return '';
+    }
     db.collection('chatRooms').doc(threadId).onSnapshot(response => {
       // if (response.data().messages !== null) {
         this.setState({messageList: response.data().messages})
@@ -75,7 +78,7 @@ class Thread extends Component {
         position = "right"
       };
 
-      return <div className={position}key={time.toDate()}><p>{m.from}</p><p>{m.text}</p><p className="time">{correct}</p></div>
+      return <div className={position}key={time.toDate()}><p>{m.text}</p><p className="time">{correct}</p></div>
     })
 
 

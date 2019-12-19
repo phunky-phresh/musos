@@ -77,12 +77,12 @@ class SearchUser extends Component {
               value={selectSearch}
               onChange={this._handeChange}
               options={options}
-              placeholder={"search..."}
+              placeholder={"Select user to search"}
               autoFocus
               required
             />
           </div>
-          <Button className="search-button" size="m" block disabled={isInvalid} variant="outline-primary">search</Button>
+          <Button type="submit" className="search-button" size="m" block disabled={isInvalid} variant="outline-primary">search</Button>
         </form>
       </div>
     )

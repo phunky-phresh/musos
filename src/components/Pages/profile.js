@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withAuth } from '../Session/session-context';
 // import SearchBar from '../searchUser';
 import { Button } from 'react-bootstrap';
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 // import * as ROUTES from '../../constants/routes'
 
 class Profile extends Component {
@@ -80,10 +80,20 @@ class Profile extends Component {
     }
     return(
       <div>
-        <h1>Profile</h1>
-        <h1>{this.state.user.username}</h1>
 
-        <Button onClick={this._handleMessageClick}>Message</Button>
+        <h1>{this.state.user.username}</h1>
+        <Button size="sm" onClick={this._handleMessageClick}>Message</Button>
+        <h3>Email:</h3>
+          <p>{this.state.user.email}</p>
+
+        <h3>About:</h3>
+          <p>{this.state.user.about}</p>
+
+        <h3>Location:</h3>
+          <p>{this.state.user.location}</p>
+        <h3>Media:</h3>
+          <p><Link href={this.state.user.media} >{this.state.user.media}</Link></p>
+
       </div>
     )
   }
