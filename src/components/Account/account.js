@@ -56,25 +56,23 @@ class AccountPage extends Component {
     } else {
       return(
         <div>
-        <Container>
-          <Row>
+
+
           <h1>{this.state.username}</h1>
-          </Row>
-          <Row>
+
+
           <h2>Email:</h2>
             <p>{this.state.email}</p>
-          </Row>
-          <Row>
+
           <h2>About:</h2>
             <p>{this.state.about}</p>
-          </Row>
-          <Row>
+
           <h2>Location:</h2>
             <p>{this.state.location}</p>
-          </Row>
+          
           <Button onClick={this._handleFormView}>Update Account Detail</Button>
           <Button onClick={this._handleSetView}>Password Settings</Button>
-          </Container>
+
         </div>
       )
     }

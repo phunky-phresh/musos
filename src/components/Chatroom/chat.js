@@ -66,7 +66,7 @@ const ThreadList = (props) => {
         user1name = t.users[0].username
       }
 
-        return <div key={2}><Link to={`/thread/${ threadLink }`}>{user1name}</Link></div>
+        return <Link to={`/thread/${ threadLink }`}><div className="thread" key={2}>{user1name}</div></Link>
 
 
       // console.log(chatWith);

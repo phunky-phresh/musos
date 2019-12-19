@@ -4,3 +4,6 @@
 .nav-link {
   display: inline-block;
 }
+.notification {
+  background-color: coral;
+}

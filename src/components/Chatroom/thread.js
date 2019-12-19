@@ -50,6 +50,9 @@ class Thread extends Component {
   _newMessage = () => {
     let container = document.querySelector('.container');
     // container.scrollTo(0,container.scrollHeight);
+    if (!container) {
+      return ''
+    }
     container.scrollTop = container.scrollHeight - container.clientHeight;
   }
 
@@ -59,9 +62,13 @@ class Thread extends Component {
     const messages = messageList.map(m => {
       let time = m.time;
       let realTime = time.toDate() + "";
-      console.log(realTime);
       let correct = realTime.slice(0, 24)
-      return <div key={time.toDate()}><h4>from: {m.from}</h4><p>{m.text}</p>{correct}<p></p></div>
+      let position = "left";
+      if (m.from === localStorage.username) {
+        position = "right"
+      };
+
+      return <div className={position}key={time.toDate()}><h4>from: {m.from}</h4><p>{m.text}</p>{correct}<p></p></div>
     })
 
 

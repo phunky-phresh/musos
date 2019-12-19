@@ -4,3 +4,20 @@
   overflow-y: scroll;
   background-color: gray;
 }
+.thread {
+  /* width: 100px; */
+  height: 50px;
+  background-color: lavender;
+  margin: 10px;
+}
+.thread:hover {
+  background-color: white;
+}
+.right {
+  text-align: right;
+  background-color: white;
+}
+.left {
+  text-align: left;
+  background-color: blue
+}
