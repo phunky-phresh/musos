@@ -49,17 +49,13 @@ class Thread extends Component {
     db.collection('chatRooms').doc(threadId).update({
       seen: false
     }).then(() => {
-      console.log('success');
-    }).catch((error) => {
-      console.log('fail', error);
-    })
+    });
     this.setState({text: ''});
 
   }
 
   _newMessage = () => {
     let container = document.querySelector('.container');
-    // container.scrollTo(0,container.scrollHeight);
     if (!container) {
       return;
     }

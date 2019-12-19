@@ -58,11 +58,15 @@ class SearchUser extends Component {
 
   render() {
     const users = this.state.foundUsers;
-    const options = users.map(user => {
-      return {
-        value: user.id,
-        label: user.username
-      }
+    const filter = users.filter(user =>
+      user.id !== localStorage.uid
+    );
+    const options = filter.map(user => {
+
+        return {
+          value: user.id,
+          label: user.username
+        }
     })
 
     const isInvalid = this.state.selectSearch === null;
