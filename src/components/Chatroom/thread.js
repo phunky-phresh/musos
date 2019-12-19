@@ -3,7 +3,7 @@ import { withAuthorization } from '../Session/session';
 import { withAuth } from '../Session/session-context';
 import * as firebase from 'firebase'
 
-import { Form, Button } from 'react-bootstrap';
+import { Form, FormControl, Button, InputGroup } from 'react-bootstrap';
 import './thread.css';
 
 class Thread extends Component {
@@ -75,20 +75,29 @@ class Thread extends Component {
         position = "right"
       };
 
-      return <div className={position}key={time.toDate()}><h4>from: {m.from}</h4><p>{m.text}</p>{correct}<p></p></div>
+      return <div className={position}key={time.toDate()}><p>{m.from}</p><p>{m.text}</p><p className="time">{correct}</p></div>
     })
 
 
 
     return(
       <div>
-        <h1>thread</h1>
         <div className="container">
         {messages}
         </div>
         <Form onSubmit={this._handleSubmit}>
-          <input onChange={ this._handleInput } value={this.state.text} type="text" />
-          <Button type="submit">Send</Button>
+          <InputGroup className="mb-3">
+            <FormControl
+              placeholder="Type message..."
+              aria-label="Message field"
+              aria-describedby="basic-addon2"
+              onChange={ this._handleInput }
+              value={this.state.text}
+            />
+            <InputGroup.Append>
+              <Button type="submit" variant="outline-primary">Send</Button>
+            </InputGroup.Append>
+          </InputGroup>
         </Form>
       </div>
     )

@@ -70,14 +70,12 @@ class NavigationAuth extends Component {
 
             <Nav className="mr-auto">
               <Nav>
-                <Link className="nav-link" to={ROUTES.FEED}>Feed</Link>
+                <Link className="nav-link" to={ROUTES.FEED}>Landing</Link>
               </Nav>
               <Nav>
                 <Link className="nav-link" to={ROUTES.ACCOUNT}>Account</Link>
               </Nav>
-              <Nav>
-                <Link className="nav-link" to={ROUTES.ADMIN}>Admin</Link>
-              </Nav>
+
               <Nav>
                 <Link Click={this._removeNotification} className={this.state.chatClass} to={ROUTES.CHAT_ROOM}>Chat</Link>
               </Nav>

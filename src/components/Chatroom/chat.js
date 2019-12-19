@@ -101,7 +101,7 @@ const ThreadList = (props) => {
 
   return (
     <div>
-      <h1>Chat room coming soon</h1>
+      <h1>Messages</h1>
       {threads}
 
     </div>

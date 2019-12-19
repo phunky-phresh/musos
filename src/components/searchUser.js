@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withAuthorization } from './Session/session';
 import { withAuth } from './Session/session-context';
 import Select from 'react-select';
+import {Button} from 'react-bootstrap';
 
 class SearchUser extends Component {
   constructor() {
@@ -68,19 +69,21 @@ class SearchUser extends Component {
 
     const { selectSearch } = this.state
     return(
-      <div>
-      <form onSubmit={this._handleSearch}>
-        <Select
-          name='search'
-          value={selectSearch}
-          onChange={this._handeChange}
-          options={options}
-          placeholder={"search..."}
-          autoFocus
-          required
-        />
-        <button disabled={isInvalid} type="submit">search</button>
-      </form>
+      <div >
+        <form className="search-bar" onSubmit={this._handleSearch}>
+          <div className="dropdown-search">
+            <Select
+              name='search'
+              value={selectSearch}
+              onChange={this._handeChange}
+              options={options}
+              placeholder={"search..."}
+              autoFocus
+              required
+            />
+          </div>
+          <Button className="search-button" size="m" block disabled={isInvalid} variant="outline-primary">search</Button>
+        </form>
       </div>
     )
   }

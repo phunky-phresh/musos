@@ -7,3 +7,10 @@
 .notification {
   background-color: coral;
 }
+.search-button {
+  margin-top: 10px;
+}
+.dropdown-search {
+  /* display: inline-block; */
+  /* max-width: 100px; */
+}

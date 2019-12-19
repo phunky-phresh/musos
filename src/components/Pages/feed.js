@@ -15,7 +15,7 @@ class Feed extends Component {
   // }
   render() {
     return(
-      <h1>Feed coming soon</h1>
+      <h1>What's that? a chat...app!</h1>
     )
   }
 
