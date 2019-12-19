@@ -15,7 +15,10 @@ class Feed extends Component {
   // }
   render() {
     return(
-      <h1>What's that? a chat...app!</h1>
+      <div>
+        <h1>Segway Chat App</h1>
+        <h3>When you set out to build something and instead build a chat room app.</h3>
+      </div>
     )
   }
 

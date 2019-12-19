@@ -40,7 +40,6 @@ class NavigationAuth extends Component {
             // console.log(user1);
             let newArr = [...this.state.thread]
             if (localStorage.uid === user1 || localStorage.uid === user2) {
-              console.log(thread.doc.id);
               let t = thread.doc.id
               newArr.push(t);
 
@@ -48,7 +47,6 @@ class NavigationAuth extends Component {
             this.setState({thread: newArr})
           });
           if (this.state.thread) {
-            console.log('notification');
             this.setState({chatClass: 'nav-link notification'})
           }
       });
