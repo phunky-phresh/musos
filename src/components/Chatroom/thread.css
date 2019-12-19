@@ -10,6 +10,9 @@
   background-color: lavender;
   margin: 10px;
 }
+.notification {
+  background-color: coral;
+}
 .thread:hover {
   background-color: white;
 }

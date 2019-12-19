@@ -43,6 +43,13 @@ class Thread extends Component {
     thread.update({
       messages: firebase.firestore.FieldValue.arrayUnion(newText)
     })
+    db.collection('chatRooms').doc(threadId).update({
+      seen: false
+    }).then(() => {
+      console.log('success');
+    }).catch((error) => {
+      console.log('fail', error);
+    })
     this.setState({text: ''});
 
   }
@@ -51,7 +58,7 @@ class Thread extends Component {
     let container = document.querySelector('.container');
     // container.scrollTo(0,container.scrollHeight);
     if (!container) {
-      return ''
+      return;
     }
     container.scrollTop = container.scrollHeight - container.clientHeight;
   }

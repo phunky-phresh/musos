@@ -48,7 +48,7 @@ class NavigationAuth extends Component {
             }
             this.setState({thread: newArr})
           });
-          if (this.state.notification === true) {
+          if (this.state.thread) {
             console.log('notification');
             this.setState({chatClass: 'nav-link notification'})
           }
@@ -57,6 +57,7 @@ class NavigationAuth extends Component {
   }
   _removeNotification = () => {
     this.setState({chatClass: 'nav-link'})
+    console.log('remove');
   }
 
 
@@ -78,7 +79,7 @@ class NavigationAuth extends Component {
                 <Link className="nav-link" to={ROUTES.ADMIN}>Admin</Link>
               </Nav>
               <Nav>
-                <Link onClick={this._removeNotification} className={this.state.chatClass} to={ROUTES.CHAT_ROOM}>Chat</Link>
+                <Link Click={this._removeNotification} className={this.state.chatClass} to={ROUTES.CHAT_ROOM}>Chat</Link>
               </Nav>
             </Nav>
 
