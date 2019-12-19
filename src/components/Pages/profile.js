@@ -5,6 +5,10 @@ import { withAuth } from '../Session/session-context';
 import { Button } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 // import * as ROUTES from '../../constants/routes'
+import { css } from '@emotion/core';
+import { PropagateLoader } from 'react-spinners';
+
+
 
 class Profile extends Component {
   constructor(props) {
@@ -12,7 +16,8 @@ class Profile extends Component {
     this.state = {
       user: null,
       currentUsername: localStorage.username,
-      existingThread: null
+      existingThread: null,
+      loading: true
     }
     // console.log(this.state.currentUsername);
  }
@@ -43,6 +48,10 @@ class Profile extends Component {
           }
         })
       })
+      setTimeout(function(){
+        this.setState({loading:false});
+      }.bind(this),2000)
+
   }
 
   componentDidUpdate(prevProps) {
@@ -75,8 +84,22 @@ class Profile extends Component {
 
 
   render() {
-    if (!this.state.user) {
-      return '';
+    const override = css`
+      display: inline-block;
+      margin: 0 auto;
+      border-color: red;
+    `;
+    if (this.state.loading === true) {
+      return (
+        <div className="sweet-loading">
+          <PropagateLoader
+             css={override}
+             size={15} // or 150px
+             color={"#5D87E8"}
+             loading={this.state.loading}
+           />
+       </div>
+      )
     }
     return(
       <div>

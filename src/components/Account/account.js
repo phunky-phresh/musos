@@ -8,6 +8,7 @@ import './account.css'
 import { Button, Row, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+
 class AccountPage extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +42,6 @@ class AccountPage extends Component {
   }
   _handleSetView = () => {
     this.setState({view: 'settings'})
-    console.log('set');
   }
   render() {
     let view = this.state.view

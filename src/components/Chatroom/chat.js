@@ -76,14 +76,13 @@ const ThreadList = (props) => {
         notificationClass = 'thread notification'
       }
 
-        return <Link to={`/thread/${ threadLink }`}>
+        return <Link   onClick={props.seen}  key={threadLink} to={`/thread/${ threadLink }`}>
         <div
-          onClick={props.seen}
+
           className={notificationClass}
-          key={threadLink}
-          value={threadLink}
+
           >
-          <h4>{user1name}</h4>
+          <h4 value={threadLink} >{user1name}</h4>
         </div>
         </Link>
 
