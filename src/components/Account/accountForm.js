@@ -8,7 +8,6 @@ import {Form, Button} from 'react-bootstrap';
 class AccountForm extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
 
     }
@@ -30,7 +29,6 @@ class AccountForm extends Component {
   }
 
   componentDidMount() {
-    console.log('this will collect users existing details');
     const db = this.props.firebase.db
     const uid = localStorage.uid
 
@@ -51,7 +49,7 @@ class AccountForm extends Component {
       location,
       media
     } = this.state;
-    console.log(this.props);
+    
     if (!this.state) {
       return ''
     }

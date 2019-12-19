@@ -5,40 +5,36 @@ import AccountForm from './accountForm';
 import { PasswordForgetForm } from './pwordforget';
 import PasswordChangeForm from './pwordchange';
 
-import { Button } from 'react-bootstrap';
+import { Button, Row, Container } from 'react-bootstrap';
 
 class AccountPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: this.props.authUser.uid,
-      view: '',
-      username: null,
-      email: null,
-      phone: null,
-      address: null
+      view: ''
     }
     console.log(this.state.view);
   }
 
-  componentDidMount() {
+  _populateState = () => {
     const db = this.props.firebase.db
-    const user = db.collection('users').doc(this.state.currentUser)
+    const uid = localStorage.uid
+    const user = db.collection('users').doc(uid)
     user.get().then((response) => {
-      this.setState({
-        username: response.data().username,
-        email: response.data().email,
-        phone: response.data().phone,
-        address: response.data().address
-      });
+      let state = response.data()
+      this.setState({ ...state });
     })
-
-    // users.get().then((response) => {
-    //   response.forEach( u => console.log(u.data()))
-    // })
   }
+  componentDidMount() {
+    this._populateState()
+  }
+  // componentDidUpdate(prevProps) {
+  //   console.log(prevProps);
+  // }
+
   _handleViewReset = () => {
     this.setState({view: ''})
+    this._populateState();
   }
   _handleFormView = () => {
     this.setState({view: 'form'})
@@ -60,12 +56,25 @@ class AccountPage extends Component {
     } else {
       return(
         <div>
+        <Container>
+          <Row>
           <h1>{this.state.username}</h1>
-          <h1>Email: {this.state.email}</h1>
-          <h1>Mobile: {this.state.phone}</h1>
-          <h1>Address: {this.state.address}</h1>
+          </Row>
+          <Row>
+          <h2>Email:</h2>
+            <p>{this.state.email}</p>
+          </Row>
+          <Row>
+          <h2>About:</h2>
+            <p>{this.state.about}</p>
+          </Row>
+          <Row>
+          <h2>Location:</h2>
+            <p>{this.state.location}</p>
+          </Row>
           <Button onClick={this._handleFormView}>Update Account Detail</Button>
           <Button onClick={this._handleSetView}>Password Settings</Button>
+          </Container>
         </div>
       )
     }

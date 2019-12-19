@@ -4,7 +4,7 @@ import { withAuth } from '../Session/session-context';
 import * as firebase from 'firebase'
 
 import { Form, Button } from 'react-bootstrap';
-
+import './thread.css';
 
 class Thread extends Component {
   constructor(props){
@@ -22,7 +22,7 @@ class Thread extends Component {
     db.collection('chatRooms').doc(threadId).onSnapshot(response => {
       // if (response.data().messages !== null) {
         this.setState({messageList: response.data().messages})
-
+        this._newMessage();
     })
   }
   _handleInput = (e) => {
@@ -47,11 +47,31 @@ class Thread extends Component {
 
   }
 
+  _newMessage = () => {
+    let container = document.querySelector('.container');
+    // container.scrollTo(0,container.scrollHeight);
+    container.scrollTop = container.scrollHeight - container.clientHeight;
+  }
+
   render() {
+    const db = this.props.firebase.db;
+    const messageList = this.state.messageList;
+    const messages = messageList.map(m => {
+      let time = m.time;
+      let realTime = time.toDate() + "";
+      console.log(realTime);
+      let correct = realTime.slice(0, 24)
+      return <div key={time.toDate()}><h4>from: {m.from}</h4><p>{m.text}</p>{correct}<p></p></div>
+    })
+
+
+
     return(
       <div>
         <h1>thread</h1>
-        <MessageList list={this.state.messageList}/>
+        <div className="container">
+        {messages}
+        </div>
         <Form onSubmit={this._handleSubmit}>
           <input onChange={ this._handleInput } value={this.state.text} type="text" />
           <Button type="submit">Send</Button>
@@ -62,19 +82,6 @@ class Thread extends Component {
 
 }
 
-const MessageList = (props) => {
-  const messageList = props.list
-  const messages = messageList.map(m => {
-    console.log(m.time);
-    return <div key={m.time.seconds}><h4>from: {m.from}</h4><p>{m.text}</p></div>
-  })
-  return(
-    <div>
-    <h1>list</h1>
-      {messages}
-    </div>
-  )
-}
 
 const condition = authUser => !!authUser;
 
