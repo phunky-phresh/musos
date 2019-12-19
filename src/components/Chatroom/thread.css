@@ -28,7 +28,7 @@
   margin-left: 270px;
   margin-right: 0;
   margin: 10px 0 10px 270px;
-  width: 500px;
+  width: 50%;
   text-align: right;
   background-color: #5D87E8;
   padding: 10px;
@@ -37,7 +37,7 @@
 }
 .left {
   display: block;
-  width: 500px;
+  width: 50%;
   text-align: left;
   background-color: gray;
   margin: 10px 0;
@@ -49,3 +49,21 @@
   color: #cac8c8;
   font-size: 10px;
 }
+
+@media (max-width: 500px) {
+  .left {
+    width: 100px;
+  }
+  .right {
+    width: 100px;
+  }
+
+}
+/* @media (max-width: 769px) {
+  .left {
+    width: 50%;
+  }
+  .right {
+    width: 50%;
+  }
+} */
