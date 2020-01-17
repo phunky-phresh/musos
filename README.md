@@ -1,7 +1,7 @@
 # mixedBiz - Project03
 
 ### Demo
-check out the [Live Demo](https://musos-8f0c3.firebaseapp.com/#/signin)
+check out the [Live Demo](https://musos-8f0c3.firebaseapp.com/#/)
 
 
 ## Project outline
@@ -21,3 +21,9 @@ The next step is to improve user profiles, create different user gateways for ar
 - Secure signup and login
 - Account customization
 - new message notifcations (in-app)
+- password reset
+
+### Tech used
+
+- React.js
+- Firebase
