@@ -41,10 +41,14 @@ class ChatRoom extends Component {
       let sortedList = returnedThreads.sort((a,b) => {
         return (b.time).toDate() - (a.time).toDate();
       })
-      // console.log(sortedList);
-      let firstMessage = sortedList[0].id;
-      console.log(firstMessage);
+      console.log(sortedList);
+      let firstMessage;
+      if (sortedList.length >= 1) {
+        firstMessage = sortedList[0].id;
+      }
       
+      console.log(firstMessage);
+
       this.setState({
         threads: sortedList,
         active: firstMessage
