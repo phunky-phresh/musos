@@ -4,30 +4,64 @@ import { withAuth } from '../Session/session-context';
 import * as firebase from 'firebase'
 
 import { Form, FormControl, Button, InputGroup } from 'react-bootstrap';
-import './thread.css';
 
 class Thread extends Component {
   constructor(props){
     super(props);
+    console.log(props);
+    
     this.state = {
       text: '',
       currentUsername: localStorage.username,
-      messageList: []
+      messageList: [],
+      active: this.props.active
     }
+    console.log(this.state.active);
+
   }
 
+
   componentDidMount() {
+    // this.setState({active: this.props.active})
     const db = this.props.firebase.db;
-    const threadId = this.props.match.params.threadId
+    const threadId = this.props.active
     if (!threadId) {
       return '';
     }
     db.collection('chatRooms').doc(threadId).onSnapshot(response => {
       // if (response.data().messages !== null) {
         this.setState({messageList: response.data().messages})
-        this._newMessage();
+        this._newMessage();  
     })
+    
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    // console.log(prevProps.active);
+    
+    // console.log(this.props.active);
+    
+    // this.setState({active: this.props.active})
+    if (this.props.active !== prevProps.active) {
+    console.log(prevProps.active);
+    console.log(this.props.active);
+
+
+      const db = this.props.firebase.db;
+      const threadId = this.props.active
+      if (!threadId) {
+        return '';
+      }
+      db.collection('chatRooms').doc(threadId).onSnapshot(response => {
+        // if (response.data().messages !== null) {
+          this.setState({messageList: response.data().messages})
+          this._newMessage();
+          console.log('here-thread');
+          
+      })
+    } 
+  }
+
   _handleInput = (e) => {
     this.setState({text: e.target.value})
   }
@@ -36,7 +70,7 @@ class Thread extends Component {
     event.preventDefault();
 
     const db = this.props.firebase.db;
-    const threadId = this.props.match.params.threadId
+    const threadId = this.props.active
     const newText = {
       time: new Date(),
       from: this.state.currentUsername,
@@ -47,8 +81,11 @@ class Thread extends Component {
       messages: firebase.firestore.FieldValue.arrayUnion(newText)
     })
     db.collection('chatRooms').doc(threadId).update({
-      seen: false
+      seen: false, 
+      time: new Date()
     }).then(() => {
+      console.log('next');
+      
     });
     this.setState({text: ''});
 
@@ -74,24 +111,26 @@ class Thread extends Component {
         position = "right"
       };
 
-      return <div className={position}key={time.toDate()}><p>{m.text}</p><p className="time">{correct}</p></div>
+      return <div className={position} key={time.toDate()}><p>{m.text}</p><p className="time">{correct}</p></div>
+      console.log('message lists');
+      
     })
 
 
 
     return(
-      <div>
-        <div className="container">
+      <div className="message-window">
+        <div className="thread-col">
         {messages}
         </div>
-        <Form onSubmit={this._handleSubmit}>
-          <InputGroup className="mb-3">
+        <Form className="message-field" onSubmit={this._handleSubmit}>
+          <InputGroup className="">
             <FormControl
               placeholder="Type message..."
               aria-label="Message field"
               aria-describedby="basic-addon2"
               onChange={ this._handleInput }
-              value={this.state.text}
+              value={ this.state.text }
             />
             <InputGroup.Append>
               <Button type="submit" variant="outline-primary">Send</Button>

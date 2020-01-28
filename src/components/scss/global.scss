@@ -1,0 +1,48 @@
+.thread {
+    background-color: green;
+    height: 80px;
+    border-bottom: 1px solid black;
+    color: black;
+    &:hover {
+        background-color: gray;
+    }
+}
+
+.thread-link {
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.message-window {
+    max-width: 100vw;
+    height: 100%;
+}
+.message-field {
+    // bottom: 0;
+    position: absolute;
+    width: 100%;
+}
+.thread-col {
+    max-width: 100vw;
+    height: 400px;
+    overflow-y: scroll;
+    // overflow: hidden;
+    margin-top: 5px;
+}
+.list-col {
+    max-width: 100vw;
+    height: 400px;
+    overflow-y: scroll;
+    // overflow: hidden;
+    margin-top: 5px;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    // margin-right: -15px;
+    // margin-left: -15px;
+    height: 100%;
+    max-width: 100vw;
+}

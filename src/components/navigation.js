@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
 import { AuthUserContext } from './Session/session';
 import SignOutButton from './Sign/signout';
 import * as ROUTES from '../constants/routes';
-import './navigation.css'
+import './navigation.css';
+import Search from './searchUser';
 //bootstrap/////
-import {Navbar, Nav} from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 
 const Navigation = (props) => (
   <div>
@@ -37,7 +38,7 @@ class NavigationAuth extends Component {
             doc.docChanges().forEach( thread => {
             let user1 = thread.doc.data().users[0].uid
             let user2 = thread.doc.data().users[1].uid
-            // console.log(user1);
+            console.log('here-nav');
             let newArr = [...this.state.thread]
             if (localStorage.uid === user1 || localStorage.uid === user2) {
               let t = thread.doc.id
@@ -52,6 +53,7 @@ class NavigationAuth extends Component {
       });
 
   }
+  
   _removeNotification = () => {
     this.setState({chatClass: 'nav-link'})
     console.log('remove');
@@ -77,9 +79,7 @@ class NavigationAuth extends Component {
                 <Link onClick={this._removeNotification} className={this.state.chatClass} to={ROUTES.CHAT_ROOM}>Chat</Link>
               </Nav>
             </Nav>
-
               <SignOutButton />
-
           </Navbar>
         </div>
       )
@@ -100,6 +100,7 @@ const NavigationNonAuth = () => (
   </Navbar>
   </div>
 );
+
 const condition = authUser => !!authUser;
 
 export default withAuth(withAuthorization(condition)(Navigation));

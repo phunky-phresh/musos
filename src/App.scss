@@ -1,0 +1,10 @@
+.wrapper {
+  /* max-width: 800px; */
+  // margin: 1em auto;
+}
+html {
+  // height: 100vh;
+}
+
+@import './components/scss/mixins.scss';
+@import './components/scss/global.scss';

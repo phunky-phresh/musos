@@ -64,12 +64,17 @@ class Profile extends Component {
           {uid: currentUserId, username: currentUsername},
           {uid: profileUserId, username: profileUsername}
         ],
-        messages: []
+        messages: [],
+        id: `${currentUserId+profileUserId}`,
+        time: new Date()
       })
-      this.props.history.push(`/thread/${ mThreadId }`)
-    } else {
-      this.props.history.push(`/thread/${ this.state.existingThread }`)
-    }
+      // this.props.history.push(`/thread/${ mThreadId }`)
+      console.log('sucess');
+      
+    } 
+    // else {
+    //   this.props.history.push(`/thread/${ this.state.existingThread }`)
+    // }
 
   }
 
@@ -82,7 +87,7 @@ class Profile extends Component {
       <div>
 
         <h1>{this.state.user.username}</h1>
-        <Button size="sm" onClick={this._handleMessageClick}>Message</Button>
+        <Link to={'/chat-room'} size="sm" onClick={this._handleMessageClick}>Message</Link>
         <h3>Email:</h3>
           <p>{this.state.user.email}</p>
 

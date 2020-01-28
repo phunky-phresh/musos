@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { withAuthentication } from './components/Session/session';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './App.scss';
 import * as ROUTES from './constants/routes';
 //Route Imports
 import Navigation from './components/navigation';

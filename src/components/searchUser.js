@@ -73,8 +73,8 @@ class SearchUser extends Component {
 
     const { selectSearch } = this.state
     return(
-      <div >
-        <form className="search-bar" onSubmit={this._handleSearch}>
+
+        <form onSubmit={this._handleSearch}>
           <div className="dropdown-search">
             <Select
               name='search'
@@ -86,13 +86,13 @@ class SearchUser extends Component {
               required
             />
           </div>
-          <Button type="submit" className="search-button" size="m" block disabled={isInvalid} variant="outline-primary">search</Button>
+
         </form>
-      </div>
+      
     )
   }
 }
-
+  // <Button type="submit" className="search-button" size="m" block disabled={isInvalid} variant="outline-primary">search</Button>
 const condition = authUser => !!authUser;
 
 export default withAuth(withAuthorization(condition)(SearchUser));
