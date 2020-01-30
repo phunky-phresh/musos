@@ -63,7 +63,7 @@ class NavigationAuth extends Component {
     render() {
 
       return(
-        <div>
+        <div className="top">
           <Navbar bg="dark" variant="dark">
 
 
@@ -81,7 +81,8 @@ class NavigationAuth extends Component {
             </Nav>
               <SignOutButton />
           </Navbar>
-        </div>
+          <Search />
+          </div>
       )
     }
   }

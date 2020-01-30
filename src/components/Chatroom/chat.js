@@ -70,8 +70,8 @@ class ChatRoom extends Component {
       return '';
     }
     return(
-      <div className="row">
-      <Col md={4}>
+      <div className="wrap">
+      
       <ThreadList
         list={this.state.threads}
         link={this.props.history}
@@ -80,13 +80,12 @@ class ChatRoom extends Component {
         seen={this._handleSeen}
         active={this._setActiveThread}
       />
-      </Col>
+     
 
-    <Col md={8}>
+    
       <Thread 
         active={this.state.active}
       />
-    </Col>
     </div>
     )
   }
@@ -127,8 +126,7 @@ const ThreadList = (props) => {
     
  
   return (
-    <div className="list-col">
-      <h1>Messages</h1>
+    <div className="column two">
       {threads}
     </div>
   )

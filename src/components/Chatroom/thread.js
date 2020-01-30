@@ -45,6 +45,7 @@ class Thread extends Component {
     if (this.props.active !== prevProps.active) {
     console.log(prevProps.active);
     console.log(this.props.active);
+    
 
 
       const db = this.props.firebase.db;
@@ -119,10 +120,9 @@ class Thread extends Component {
 
 
     return(
-      <div className="message-window">
-        <div className="thread-col">
+        <div className="column">
         {messages}
-        </div>
+        
         <Form className="message-field" onSubmit={this._handleSubmit}>
           <InputGroup className="">
             <FormControl

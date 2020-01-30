@@ -43,23 +43,14 @@ class HomePage extends Component {
 
       return(
         <div>
-        <SearchBar
+        {/* <SearchBar
           onSearch={this._handleSearchUser}
-        />
+        /> */}
         </div>
       );
   }
 }
 
-
-
-// const Details = (props) => (
-//
-//   <div>
-//     <h1>HomePage coming Soon!</h1>
-//     <p>The home page is accessible to every signed in user</p>
-//   </div>
-// );
 
 const condition = authUser => !!authUser;
 

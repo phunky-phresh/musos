@@ -1,3 +1,4 @@
+
 .thread {
     background-color: green;
     height: 80px;
@@ -15,34 +16,79 @@
     }
 }
 
-.message-window {
-    max-width: 100vw;
-    height: 100%;
-}
+// .message-window {
+//     max-width: 100vw;
+//     height: 100%;
+// }
 .message-field {
-    // bottom: 0;
+    bottom: 0;
     position: absolute;
-    width: 100%;
+    width: 70%;
 }
-.thread-col {
-    max-width: 100vw;
-    height: 400px;
-    overflow-y: scroll;
-    // overflow: hidden;
-    margin-top: 5px;
+
+
+// individual scrolling windows
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
-.list-col {
-    max-width: 100vw;
-    height: 400px;
-    overflow-y: scroll;
-    // overflow: hidden;
-    margin-top: 5px;
+
+body {
+    overflow-x: hidden;
 }
-.row {
+
+html,body {
+    padding: 0;
+    margin: 0;
+    // color: #ebebeb;
+}
+.top {
+    // display: -webkit-box;
+    // display: -webkit-flex;
+    // display: -ms-flexbox;
+    // display: flex;
+    // -webkit-box-align: center;
+    // -webkit-align-items: center;
+    // -ms-flex-align: center;
+    // align-items: center;
+    // -webkit-box-pack: center;
+    // -webkit-justify-content: center;
+    // -ms-flex-pack: center;
+    // justify-content: center;
+    // background-color: darkgreen;
+    // font-size: 3rem;
+    position: relative;
+    z-index: 10;
+    height: 100px;
+}
+
+.wrap {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    // margin-right: -15px;
-    // margin-left: -15px;
-    height: 100%;
-    max-width: 100vw;
+    overflow: hidden;
+    height: 100vh;
+    margin: -100px 0 0 0;
+    padding: 100px 0 0 0;
+    position: relative;
+    // margin-left: 0;
+    // margin-right: 0;
+    width: 100vw;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: overflow;
+}
+.column {
+    overflow: auto;
+    height: auto;
+    // padding: .5rem;
+    // width: 100%;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    // background-color: indigo;
+}
+.two {
+    width: 30%;
 }

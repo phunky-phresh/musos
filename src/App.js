@@ -20,20 +20,21 @@ import Feed from './components/Pages/feed';
 const App = () => (
   <Router>
     <div>
+      
       <Navigation />
-
-      <div className="wrapper">
+      <Route path={ROUTES.SEARCH} component={HomePage} />
+      
+      
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
       <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
-      <Route path={ROUTES.SEARCH} component={HomePage} />
       <Route path={ROUTES.FEED} component={Feed} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
 
       <Route path={ROUTES.CHAT_ROOM} component={ChatRoom} />
       <Route path={ROUTES.THREAD} component={Thread} />
       <Route path={ROUTES.PROFILE} component={Profile} />
-      </div>
+      
     </div>
   </Router>
 )
