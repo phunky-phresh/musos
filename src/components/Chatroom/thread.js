@@ -112,7 +112,7 @@ class Thread extends Component {
         position = "self"
       };
 
-      return <li className={position}><div class="message"><p>{m.text}</p><p className="time">{correct}</p></div></li>
+      return <li className={position}><div class="message"><p>{m.text}</p><time className="time">{correct}</time></div></li>
       
     })
 
@@ -134,7 +134,7 @@ class Thread extends Component {
               value={ this.state.text }
             />
             <InputGroup.Append>
-              <Button type="submit" variant="outline-primary">Send</Button>
+              <Button type="submit" variant="primary">Send</Button>
             </InputGroup.Append>
           </InputGroup>
         </Form>
