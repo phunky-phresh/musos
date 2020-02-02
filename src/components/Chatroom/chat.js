@@ -81,8 +81,6 @@ class ChatRoom extends Component {
         active={this._setActiveThread}
       />
      
-
-    
       <Thread 
         active={this.state.active}
       />

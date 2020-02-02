@@ -93,7 +93,7 @@ class Thread extends Component {
   }
 
   _newMessage = () => {
-    let container = document.querySelector('.container');
+    let container = document.querySelector('.messageBoard');
     if (!container) {
       return;
     }
@@ -107,21 +107,22 @@ class Thread extends Component {
       let time = m.time;
       let realTime = time.toDate() + "";
       let correct = realTime.slice(0, 24)
-      let position = "left";
+      let position = "other";
       if (m.from === localStorage.username) {
-        position = "right"
+        position = "self"
       };
 
-      return <div className={position} key={time.toDate()}><p>{m.text}</p><p className="time">{correct}</p></div>
-      console.log('message lists');
+      return <li className={position}><div class="message"><p>{m.text}</p><p className="time">{correct}</p></div></li>
       
     })
 
 
 
     return(
-        <div className="column">
-        {messages}
+        <div className="column messageBoard">
+          <ol className="conversation">
+            {messages}
+          </ol>
         
         <Form className="message-field" onSubmit={this._handleSubmit}>
           <InputGroup className="">
@@ -147,3 +148,7 @@ class Thread extends Component {
 const condition = authUser => !!authUser;
 
 export default withAuth(withAuthorization(condition)(Thread));
+{/* <div className={position} key={time.toDate()}><div className="bubble"><p>{m.text}</p><p className="time">{correct}</p></div></div>
+      console.log('message lists'); */}
+
+      {/* <time datetime="2009-11-13T20:00">Timothy • 51 min</time> */}
