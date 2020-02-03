@@ -124,6 +124,7 @@ class ChatRoom extends Component {
           active={this.state.active}
           searchThread={this._handleChange}
           select={this.state.selectSearch}
+          check={this.state.threadCheck}
         />
        
         <Thread 
@@ -146,7 +147,7 @@ class ChatRoom extends Component {
 }
 
 const ThreadList = (props) => {
-  console.log(props);
+  // console.log(props);
   
   if (!props.list) {
 
@@ -191,6 +192,7 @@ const ThreadList = (props) => {
       <Search 
         setActive={props.searchThread}
         search={props.select}
+        thread={props.check}
       />
       {threads}
     </div>

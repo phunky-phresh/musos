@@ -8,11 +8,11 @@ class SearchUser extends Component {
     super(props);
     this.state = {
       foundUsers: [],
-      selectSearch:null,
       username: null,
       email: null,
       phone: null,
       address: null,
+      selectSearch:null,
       threadCheck: null
     }
     console.log(props);
@@ -34,19 +34,23 @@ class SearchUser extends Component {
   componentDidUpdate(prevProps, prevState) {
     console.log('props', prevProps);
     console.log('state', prevState);
-    console.log('jelly', this.props.search);
+    console.log('jelly', this.props.thread);
     
     
-    if (this.props.search !== prevProps.search) {
-      console.log('different');
-      this.setState({selectSearch: this.props.search})
+    if (this.props !== prevProps) {
+      // console.log('different');
+      this.setState({
+        selectSearch: this.props.search,
+        threadCheck: this.props.thread
+      })
       
     }
+
     
   }
 
   _handleChange = (selectSearch) => {
-    console.log(selectSearch);
+    // console.log(selectSearch);
     // this.props.setActive
     this.setState(
       { selectSearch }
@@ -88,7 +92,8 @@ class SearchUser extends Component {
     // })
 
     this.setState({
-      selectSearch: null
+      selectSearch: null,
+      // threadCheck: null
     });
     const db = this.props.firebase.db;
     const currentUserId = localStorage.uid;
@@ -107,10 +112,11 @@ class SearchUser extends Component {
         time: new Date()
       })
       // this.props.history.push(`/thread/${ mThreadId }`)
+      console.log('nup');
       
       
     } 
-    // console.log('yup');
+    console.log('yup');
   }
 
   render() {
