@@ -7,7 +7,6 @@ import { AuthUserContext } from './Session/session';
 import SignOutButton from './Sign/signout';
 import * as ROUTES from '../constants/routes';
 import './navigation.css';
-import Search from './searchUser';
 //bootstrap/////
 import { Navbar, Nav } from 'react-bootstrap';
 
@@ -79,7 +78,7 @@ class NavigationAuth extends Component {
             </Nav>
               <SignOutButton />
           </Navbar>
-          <Search />
+          
           </div>
       )
     }

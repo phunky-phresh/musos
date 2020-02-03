@@ -41,11 +41,14 @@ class Thread extends Component {
 
       const db = this.props.firebase.db;
       const threadId = this.props.active
+      
       if (!threadId) {
         return '';
       }
       db.collection('chatRooms').doc(threadId).onSnapshot(response => {
         // if (response.data().messages !== null) {
+          console.log(response.data());
+          
           this.setState({messageList: response.data().messages})
           this._newMessage();
           

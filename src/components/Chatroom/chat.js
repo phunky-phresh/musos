@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withAuthorization } from '../Session/session';
 import { withAuth } from '../Session/session-context';
 import Thread from './thread';
+import Search from './searchUser';
+
 
 class ChatRoom extends Component {
   constructor(props) {
@@ -10,19 +12,58 @@ class ChatRoom extends Component {
       threads:null,
       active:null,
       check: null,
-      view: null
+      view: null,
+      selectSearch: null,
+      threadCheck: null
     };
+  }
+
+  _handleChange = (selectSearch) => {
+    console.log(selectSearch);
+    
+    this.setState(
+      { selectSearch }
+    );
+    const currentUserId = localStorage.uid;
+    const profileUserId = selectSearch.value;
+    const db = this.props.firebase.db;
+    const thread1 = currentUserId + profileUserId
+    const thread2 = profileUserId + currentUserId
+    const threadCheck = db.collection('chatRooms');
+
+    threadCheck.get().then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          if (doc.id === thread1 || doc.id === thread2) {
+            this.setState({
+              threadCheck: doc.id,
+              active: doc.id
+            })
+            console.log('checked');
+            
+          }
+        })
+      })
   }
 
   _setActiveThread = (e) => {
     const threadId = e.target.getAttribute('value');
-    e.target.classList.remove('notification');
+    // e.target.classList.remove('notification');
 
     this.setState({
       active: threadId,
-      view: 'active'
+      // view: 'active'
     })
   }
+  // _searchSetThread = (event) => {
+  //   // event.preventDefault();
+  //   console.log(event);
+  //   const threadId = event.target.getAttribute('value');
+  //   // event.target
+
+  //   this.setState({
+  //     active: threadId
+  //   })
+  // }
 
   _handleSubmit = (event) => {
     event.preventDefault();
@@ -81,6 +122,8 @@ class ChatRoom extends Component {
           seen={this._handleSeen}
           setActive={this._setActiveThread}
           active={this.state.active}
+          searchThread={this._handleChange}
+          select={this.state.selectSearch}
         />
        
         <Thread 
@@ -103,6 +146,8 @@ class ChatRoom extends Component {
 }
 
 const ThreadList = (props) => {
+  console.log(props);
+  
   if (!props.list) {
 
     return '';
@@ -143,6 +188,10 @@ const ThreadList = (props) => {
  
   return (
     <div className="two">
+      <Search 
+        setActive={props.searchThread}
+        search={props.select}
+      />
       {threads}
     </div>
   )
