@@ -8,7 +8,6 @@ import { Form, FormControl, Button, InputGroup } from 'react-bootstrap';
 class Thread extends Component {
   constructor(props){
     super(props);
-    console.log(props);
     
     this.state = {
       text: '',
@@ -16,7 +15,6 @@ class Thread extends Component {
       messageList: [],
       active: this.props.active
     }
-    console.log(this.state.active);
 
   }
 
@@ -37,14 +35,7 @@ class Thread extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log(prevProps.active);
-    
-    // console.log(this.props.active);
-    
-    // this.setState({active: this.props.active})
     if (this.props.active !== prevProps.active) {
-    console.log(prevProps.active);
-    console.log(this.props.active);
     
 
 
@@ -57,7 +48,6 @@ class Thread extends Component {
         // if (response.data().messages !== null) {
           this.setState({messageList: response.data().messages})
           this._newMessage();
-          console.log('here-thread');
           
       })
     } 
@@ -84,9 +74,7 @@ class Thread extends Component {
     db.collection('chatRooms').doc(threadId).update({
       seen: false, 
       time: new Date()
-    }).then(() => {
-      console.log('next');
-      
+    }).then(() => {      
     });
     this.setState({text: ''});
 
@@ -112,14 +100,14 @@ class Thread extends Component {
         position = "self"
       };
 
-      return <li className={position}><div class="message"><p>{m.text}</p><time className="time">{correct}</time></div></li>
+      return <li key={time} className={position}><div className="message"><p>{m.text}</p><time className="time">{correct}</time></div></li>
       
     })
 
 
 
     return(
-        <div className="column messageBoard">
+        <div className="messageBoard">
           <ol className="conversation">
             {messages}
           </ol>

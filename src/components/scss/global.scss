@@ -1,11 +1,13 @@
 
 .thread {
-    background-color: green;
+    // background-color:gray;
     height: 80px;
-    border-bottom: 1px solid black;
     color: black;
+    border-radius: 10px;
+    margin: 0.5rem;
+    padding: 10px;
     &:hover {
-        background-color: gray;
+        background-color: lightskyblue;
     }
 }
 
@@ -16,13 +18,9 @@
     }
 }
 
-// .message-window {
-//     max-width: 100vw;
-//     height: 100%;
-// }
 .message-field {
     bottom: 0;
-    position: absolute;
+    position: fixed;
     width: 70%;
 }
 
@@ -44,20 +42,6 @@ html,body {
     // color: #ebebeb;
 }
 .top {
-    // display: -webkit-box;
-    // display: -webkit-flex;
-    // display: -ms-flexbox;
-    // display: flex;
-    // -webkit-box-align: center;
-    // -webkit-align-items: center;
-    // -ms-flex-align: center;
-    // align-items: center;
-    // -webkit-box-pack: center;
-    // -webkit-justify-content: center;
-    // -ms-flex-pack: center;
-    // justify-content: center;
-    // background-color: darkgreen;
-    // font-size: 3rem;
     position: relative;
     z-index: 10;
     height: 100px;
@@ -80,7 +64,7 @@ html,body {
     backface-visibility: hidden;
     will-change: overflow;
 }
-.column {
+.messageBoard {
     overflow: auto;
     height: auto;
     background-color: #e5e5e5;
@@ -95,6 +79,15 @@ html,body {
 .two {
     width: 30%;
     border-right: 1px solid lightgrey;
+    overflow: auto;
+    height: auto;
+    background-color: #e5e5e5;
+
+    // padding: .5rem;
+    // width: 100%;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    // background-color: indigo;
 }
 
 .conversation {
@@ -126,4 +119,50 @@ html,body {
       font-size: 0.7rem;
       color: gray;
     }
+  }
+
+//   notification
+.nav-items {
+    max-width: 960px;
+  }
+  .nav-link {
+    display: inline-block;
+  }
+  .notification {
+    background-color: lavenderblush;
+  }
+  .search-button {
+    margin-top: 10px;
+  }
+  .dropdown-search {
+    /* display: inline-block; */
+    max-width: 400px;
+  }
+  .controls {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
+  .active {
+      background-color: lightskyblue;
+      height: 80px;
+      color: black;
+      border-radius: 10px;
+      margin: 0.5rem;
+      padding: 10px;
+  }
+
+  @media (max-width: 400px) {
+    //   .messageBoard {
+    //       display: none;
+    //   }
+      .two {
+          width: 100%;
+      }
+      .messageBoard {
+          width: 100%;
+          .message-field {
+              width: 100%;
+          }
+      }
   }

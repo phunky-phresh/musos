@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withAuthorization } from './Session/session';
 import { withAuth } from './Session/session-context';
 import Select from 'react-select';
-import {Button} from 'react-bootstrap';
 
 class SearchUser extends Component {
   constructor() {

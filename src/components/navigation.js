@@ -38,7 +38,6 @@ class NavigationAuth extends Component {
             doc.docChanges().forEach( thread => {
             let user1 = thread.doc.data().users[0].uid
             let user2 = thread.doc.data().users[1].uid
-            console.log('here-nav');
             let newArr = [...this.state.thread]
             if (localStorage.uid === user1 || localStorage.uid === user2) {
               let t = thread.doc.id
@@ -56,7 +55,6 @@ class NavigationAuth extends Component {
   
   _removeNotification = () => {
     this.setState({chatClass: 'nav-link'})
-    console.log('remove');
   }
 
 

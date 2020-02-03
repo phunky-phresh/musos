@@ -69,7 +69,6 @@ class Profile extends Component {
         time: new Date()
       })
       // this.props.history.push(`/thread/${ mThreadId }`)
-      console.log('sucess');
       
     } 
     // else {
